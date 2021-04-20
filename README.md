@@ -4,10 +4,10 @@ The software is designed for **one restaurant only**, so no need to cater (no pu
 
 The main components are:
 
-- **Employees** (managers, delivery guys)
+- **Employees** (managers, riders)
 - **Customers** of the Restaurant
 - **Meals** that can be ordered
-- **Orders** made by customers, and assigned to a given delivery guy.
+- **Orders** made by customers, and assigned to a given rider.
 
 ![System Diagram](system_diagram.png)
 
@@ -61,17 +61,17 @@ Reminder: this is an optional section, so you can skip it and come back to it la
 
 ## 5 - (`Employee`)
 
-The restaurant has two types of employees, **managers** and **delivery guys**. We want to implement a **read-only** logic for `EmployeeRepository` from a CSV file that we fill manually (no need for an `add` action).
+The restaurant has two types of employees, **managers** and **riders**. We want to implement a **read-only** logic for `EmployeeRepository` from a CSV file that we fill manually (no need for an `add` action).
 
 Open your `employees.csv` file and manually add some employees:
 
 ```bash
 id,username,password,role
 1,paul,secret,manager
-2,john,secret,delivery_guy
+2,rob,secret,rider
 ```
 
-With that information, we can implement a **login** logic in our app to have two dashboards in the router depending on the user role: one dashboard for the manager, and another dashboard for the delivery guy (with fewer user actions available).
+With that information, we can implement a **login** logic in our app to have two dashboards in the router depending on the user role: one dashboard for the manager, and another dashboard for the rider (with fewer user actions available).
 
 To handle that, we'll introduce the notion of a **session**. At the router level, we'll store the logged-in user in a session.
 
@@ -104,7 +104,7 @@ Finished? Great work :) Remember to `commit` and `push`.
 
 ## 6 - (`Order`) Time to link all the models!
 
-An order is taken for a **customer**, containing a **meal** (to simplify things, let's say that an order can only contain **one meal**) and is then assigned to a given **delivery guy**. Finally, the `Order` model needs to record whether or not the meal has been delivered.
+An order is taken for a **customer**, containing a **meal** (to simplify things, let's say that an order can only contain **one meal**) and is then assigned to a given **rider**. Finally, the `Order` model needs to record whether or not the meal has been delivered.
 
 Here's where our models link up. First, write the `Order` model class and its repository.
 
@@ -116,9 +116,9 @@ Then, make sure that the following **user stories** are implemented in your prog
 - As a manager, I can add a customer
 - As a manager, I can view all the customers
 - As a manager, I can view all the undelivered orders
-- As a manager, I can add an order for a customer and assign it to a delivery guy
-- As a delivery guy, I can view my undelivered orders
-- As a delivery guy, I can mark an order as delivered
+- As a manager, I can add an order for a customer and assign it to a rider
+- As a rider, I can view my undelivered orders
+- As a rider, I can mark an order as delivered
 
 Again, to launch just the order tests, use `rspec -t _order`
 
